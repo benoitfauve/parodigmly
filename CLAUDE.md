@@ -1,7 +1,7 @@
-# CLAUDE.md: Paradigmly handover
+# CLAUDE.md: Parodigmly handover
 
 ## What this is
-A humorous parody landing page for a fictional SaaS product, "Paradigmly". It exaggerates the visual tells of AI-generated (especially Claude-generated) websites. The joke only works if the page itself looks polished: keep the craft high and the content absurd.
+A humorous parody landing page for a fictional SaaS product, "Parodigmly". It exaggerates the visual tells of AI-generated (especially Claude-generated) websites. The joke only works if the page itself looks polished: keep the craft high and the content absurd.
 
 Live preview (private claude.ai artifact): https://claude.ai/artifact/WUWeJFv82ohEJVrNqib24C
 
