@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paradigmly: It Ships Vibes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: deadpan parody of the AI-generated SaaS landing page, every tell turned up to 11
+   IDEA: the page is a product that sells nothing, with total confidence
+   PICTURE: the terminal block, the KPI tiles, the ticker, the eyebrows
+   COLOUR and TYPE: the canonical navy + "success green", Inter + JetBrains Mono, on purpose
+   LAYOUT: hero, ticker, KPIs, features, steps, bars, pricing, CTA, "key takeaways" */
+:root{--bg:#0d1117;--card:#151b23;--line:rgba(255,255,255,.08);--ink:#e6edf3;--mute:#8b949e;--g:#4ade80;--v:6;color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 max(5vw,18px)}
+.band{padding:clamp(56px,8vw,112px) 0;position:relative}
+.eyebrow{font:600 12px/1 'JetBrains Mono',monospace;color:var(--g);text-transform:uppercase;letter-spacing:calc(.12em + var(--v)*.07em);display:inline-block;margin-bottom:18px;transition:letter-spacing .3s}
+h1,h2{font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0 0 18px;text-wrap:balance}
+h1{font-size:clamp(40px,7vw,80px)}h2{font-size:clamp(30px,4.5vw,52px)}
+.g{color:var(--g)}
+body.extra .g2{color:var(--g)}
+.sub{color:var(--mute);font-size:clamp(17px,2vw,20px);max-width:620px;margin:0 0 30px}
+.glow{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(74,222,128,calc(var(--v)*.028)),transparent 65%);pointer-events:none;filter:blur(20px);z-index:0}
+.band>.wrap{position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(13,17,23,.75);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:22px;height:64px}
+.logo{font-weight:800;font-size:19px;display:flex;gap:9px;align-items:center}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--g),#22d3ee);display:block}
+nav .links{display:flex;gap:22px;margin-left:auto;color:var(--mute);font-size:14px}
+nav .links a{text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--card);cursor:pointer;color:var(--ink);min-height:44px}
+.btn.p{background:var(--g);color:#05210f;border-color:transparent;box-shadow:0 0 calc(var(--v)*4px) rgba(74,222,128,.45)}
+.pill{display:inline-flex;gap:8px;align-items:center;font-size:13px;border:1px solid var(--line);border-radius:99px;padding:6px 14px 6px 6px;color:var(--mute);margin-bottom:26px;background:var(--card)}
+.pill b{background:rgba(74,222,128,.15);color:var(--g);border-radius:99px;padding:2px 9px;font-size:11px;letter-spacing:.08em}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center}
+.term{background:#0a0e14;border:1px solid var(--line);border-radius:14px;font:14px/1.75 'JetBrains Mono',monospace;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.term .bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.term .bar span{width:11px;height:11px;border-radius:50%;background:#30363d}
+.term .bar span:first-child{background:#f85149}.term .bar span:nth-child(2){background:#d29922}.term .bar span:nth-child(3){background:#3fb950}
+.term pre{margin:0;padding:18px 20px;white-space:pre-wrap;min-height:290px}
+.term .d{color:var(--g)}.term .m{color:var(--mute)}.term .y{color:#e3b341}
+.caret{display:inline-block;width:8px;height:17px;background:var(--g);vertical-align:-3px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.fine{font-size:12px;color:var(--mute);margin-top:14px}
+/* ticker */
+.ticker{border-block:1px solid var(--line);padding:22px 0;overflow:hidden;background:rgba(255,255,255,.015)}
+.ticker .lbl{text-align:center;margin-bottom:16px;display:block}
+.track{display:flex;gap:56px;width:max-content;animation:slide calc(60s - var(--v)*4s) linear infinite}
+.track span{font-weight:700;font-size:20px;color:#6e7681;white-space:nowrap;letter-spacing:-.01em}
+.track span::before{content:"◆ ";color:#30363d}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:40px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;position:relative;overflow:hidden}
+.kpi::after{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,var(--g),transparent);opacity:.6}
+.kpi .n{font:800 clamp(30px,4vw,40px)/1 Inter;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.kpi .n small{font-size:.55em;color:var(--g);margin-left:2px}
+.kpi .t{font-size:13px;color:var(--mute);margin-top:8px}
+.kpi .up{position:absolute;top:16px;right:16px;font:600 11px 'JetBrains Mono';color:var(--g);background:rgba(74,222,128,.1);padding:3px 7px;border-radius:6px}
+/* features */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:44px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(74,222,128,.4)}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);margin-bottom:18px}
+.card h3{margin:0 0 8px;font-size:18px}.card p{margin:0;color:var(--mute);font-size:15px}
+.step .num{font:700 13px 'JetBrains Mono';color:var(--g);margin-bottom:14px;display:block}
+/* bars */
+.bars{display:grid;gap:22px;margin-top:40px;max-width:760px}
+.row .top{display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px}
+.row .top b{font:600 14px 'JetBrains Mono';color:var(--g)}
+.meter{height:10px;border-radius:99px;background:#21262d;overflow:hidden}
+.meter i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#22c55e,var(--g),#a7f3d0);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.cmp ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cmp li{display:flex;gap:10px;color:var(--mute)}
+.cmp .yes li::before{content:"✓";color:var(--g);font-weight:800}
+.cmp .no li::before{content:"✗";color:#f85149;font-weight:800}
+/* quote */
+blockquote{margin:0;font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-.02em;line-height:1.3;max-width:860px}
+.who{display:flex;gap:12px;align-items:center;margin-top:24px;color:var(--mute);font-size:14px}
+.av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,var(--g))}
+/* pricing */
+.price{position:relative}
+.price.hot{border-color:var(--g);box-shadow:0 0 0 1px var(--g),0 20px 60px rgba(74,222,128,.15)}
+.badge{position:absolute;top:-12px;left:26px;background:var(--g);color:#05210f;font:700 11px 'JetBrains Mono';letter-spacing:.12em;padding:5px 10px;border-radius:99px}
+.amt{font-size:44px;font-weight:800;letter-spacing:-.03em;margin:10px 0}.amt small{font-size:15px;color:var(--mute);font-weight:500}
+.price ul{list-style:none;padding:0;margin:18px 0 24px;display:grid;gap:9px;font-size:14px;color:var(--mute)}
+.price li::before{content:"✓  ";color:var(--g);font-weight:800}
+.tldr{background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.05));border:1px solid rgba(74,222,128,.3);border-radius:16px;padding:28px}
+.tldr ul{margin:10px 0 0;padding-left:20px;display:grid;gap:8px}
+footer{border-top:1px solid var(--line);padding:36px 0 120px;color:var(--mute);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* vibe dial */
+.dial{position:fixed;right:18px;bottom:18px;z-index:30;background:rgba(21,27,35,.95);border:1px solid rgba(74,222,128,.35);border-radius:14px;padding:14px 16px;width:250px;box-shadow:0 10px 40px rgba(0,0,0,.5);backdrop-filter:blur(10px)}
+.dial label{display:flex;justify-content:space-between;font:600 12px 'JetBrains Mono';color:var(--g);letter-spacing:.1em}
+.dial input{width:100%;accent-color:var(--g);height:32px}
+.dial p{margin:0;font-size:12px;color:var(--mute);min-height:2.6em}
+.toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-20px);opacity:0;background:var(--g);color:#05210f;font-weight:700;padding:12px 20px;border-radius:12px;z-index:40;transition:.35s;pointer-events:none;text-align:center;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* zero vibes mode */
+body.plain{background:#fff;color:#000;font-family:'Times New Roman',serif}
+body.plain *{all:revert}
+body.plain .dial{all:unset;position:fixed;right:18px;bottom:18px;background:#eee;border:1px solid #000;padding:10px;width:250px;display:block;font:14px serif;color:#000}
+body.plain .dial *{all:revert}
+body.plain .glow,body.plain .term .bar,body.plain .ico{display:none}
+@media(max-width:860px){.hero{grid-template-columns:1fr}nav .links{display:none}nav .btn{margin-left:auto}.cmp{grid-template-columns:1fr}}
+@media(max-width:600px){.dial{left:12px;right:12px;width:auto}}
+@media(prefers-reduced-motion:reduce){.track,.caret{animation:none}.meter i{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="logo"><i></i>Paradigmly</div>
+  <div class="links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#tldr">Key takeaways</a></div>
+  <a class="btn p" href="#pricing">Get started →</a>
+</div></nav>
+
+<section class="band" id="top">
+  <div class="glow" style="top:-200px;right:-150px"></div>
+  <div class="wrap hero">
+    <div>
+      <span class="pill"><b>NEW</b> v4.0 is here. So was v3.9, last Tuesday →</span><br>
+      <span class="eyebrow">Introducing · Now in beta · Since 2019</span>
+      <h1>It <span class="g">ships</span> what the <span class="g2">roadmap</span> only <span class="g">dreamed</span>.</h1>
+      <p class="sub">One command turns vague intentions into confident deliverables. No config. No setup. No questions asked <span class="g2">(we ask four)</span>.</p>
+      <div class="cta-row">
+        <a class="btn p" href="#pricing">Start shipping, it's free →</a>
+        <a class="btn" href="#how">Read the docs <span style="color:var(--mute)">(there are none)</span></a>
+      </div>
+      <div class="fine">✓ No credit card required &nbsp; ✓ No product required &nbsp; ✓ Cancel anytime, emotionally</div>
+    </div>
+    <div class="term" aria-label="Animated terminal demo">
+      <div class="bar"><span></span><span></span><span></span></div>
+      <pre id="term"></pre>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <span class="eyebrow lbl">Trusted by teams who haven't read the docs</span>
+  <div class="track" id="track"></div>
+</div>
+
+<section class="band">
+  <div class="glow" style="top:0;left:-300px"></div>
+  <div class="wrap">
+    <span class="eyebrow">By the numbers</span>
+    <h2>Numbers that <span class="g">matter</span>.<br>And some that <span class="g2">don't</span>.</h2>
+    <p class="sub">Every metric below is real in the sense that it is displayed on a screen.</p>
+    <div class="kpis" id="kpis"></div>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
+    <span class="eyebrow">Why it matters</span>
+    <h2>Not a tool. Not a platform.<br>A <span class="g">paradigm</span>.</h2>
+    <p class="sub">Here's the thing: most products do one thing well. Paradigmly does six things, each described in exactly two lines.</p>
+    <div class="grid3" id="feats"></div>
+  </div>
+</section>
+
+<section class="band" id="how" style="background:rgba(255,255,255,.015);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Three steps. <span class="g">Always</span> three.</h2>
+    <p class="sub">Research shows that humans can only process lists of exactly three items. We didn't do the research, but we believe in it.</p>
+    <div class="grid3" id="steps"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow">Under the hood</span>
+    <h2>Engineered for <span class="g">confidence</span>.</h2>
+    <p class="sub">Our proprietary metrics, rendered as gradient bars because gradient bars are trustworthy.</p>
+    <div class="bars" id="bars"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow">Before · After</span>
+    <h2>Life <span class="g2">before</span> Paradigmly was, frankly, <span class="g">a lot</span>.</h2>
+    <div class="cmp">
+      <div class="card no"><h3 style="margin-bottom:18px">Without Paradigmly</h3><ul>
+        <li>You write code that works</li><li>Your landing page has a normal title</li><li>Headings are one colour</li><li>Nobody has said "seamless" in a meeting this week</li></ul></div>
+      <div class="card yes"><h3 style="margin-bottom:18px">With Paradigmly</h3><ul>
+        <li>The code is described as "production-ready"</li><li>Your title has a green word in it</li><li>Everything has a tiny uppercase label above it</li><li>You're absolutely right, and also it's seamless</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="glow" style="bottom:-250px;right:10%"></div>
+  <div class="wrap">
+    <span class="eyebrow">What people are saying</span>
+    <blockquote>"It's not just good. It's <span class="g">genuinely, meaningfully</span> good. And that matters."</blockquote>
+    <div class="who"><span class="av"></span><div><b style="color:var(--ink)">A placeholder name</b><br>Chief Vibes Officer, Series A company (fictional)</div></div>
+  </div>
+</section>
+
+<section class="band" id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h2>Simple, <span class="g">transparent</span> pricing.<br><span class="g2">Mostly.</span></h2>
+    <div class="grid3" id="plans"></div>
+  </div>
+</section>
+
+<section class="band" id="tldr">
+  <div class="wrap">
+    <div class="tldr">
+      <span class="eyebrow" style="margin:0">Key takeaways</span>
+      <ul>
+        <li><b>Paradigmly ships.</b> What it ships is out of scope for this page.</li>
+        <li><b>It's seamless.</b> Seams were removed in v2.1.</li>
+        <li><b>Three things.</b> There are always three things, except in this list, which has four, because we got excited.</li>
+        <li><b>Let me know if you'd like me to adjust anything!</b></li>
+      </ul>
+    </div>
+    <div style="text-align:center;margin-top:90px">
+      <span class="eyebrow">Ready?</span>
+      <h2>Stop <span class="g2">reading</span>. Start <span class="g">shipping</span>.</h2>
+      <p class="sub" style="margin-inline:auto">Join 10,000+ teams who clicked a button at some point.</p>
+      <a class="btn p" href="#top">Get started, it's free →</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div><b style="color:var(--ink)">Paradigmly</b> · Built with ♥, Tailwind-ish, and 31 eyebrow labels.</div>
+  <div>© 2026 · Privacy · Terms · Status: <span class="g">● All vibes operational</span></div>
+</div></footer>
+
+<div class="dial" role="group" aria-label="Claude-ness control">
+  <label for="vibe"><span>CLAUDE-NESS</span><span id="vv">6/10</span></label>
+  <input id="vibe" type="range" min="0" max="11" value="6">
+  <p id="vmsg">Tasteful. Restrained. Slightly green.</p>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+
+/* terminal */
+const lines=[
+ ['$ paradigmly understand "my codebase"','c'],
+ ['✓ Understood. It\'s complicated, but that\'s okay.','d'],
+ ['$ paradigmly make it pop','c'],
+ ['@e1 [button] "Pop"   @e2 [gradient] "More pop"','m'],
+ ['$ paradigmly fix the bug','c'],
+ ['✓ Fixed! (Introduced 2 new ones, for balance.)','d'],
+ ['$ paradigmly ship --vibes=max','c'],
+ ['⚠ Are you sure? You\'re absolutely right. Shipping.','y'],
+ ['✓ Deployed to production in 47ms*','d'],
+ ['  *measured once, on a good day','m']
+];
+const term=$('#term');let li=0,ci=0,out='';
+const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function type(){
+  if(li>=lines.length){setTimeout(()=>{li=0;ci=0;out='';type()},4000);return}
+  const [t,k]=lines[li];
+  if(k!=='c'){out+=`<span class="${k}">${esc(t)}</span>\n`;li++;term.innerHTML=out+'<span class="caret"></span>';setTimeout(type,450);return}
+  ci++;term.innerHTML=out+esc(t.slice(0,ci))+'<span class="caret"></span>';
+  if(ci>=t.length){out+=esc(t)+'\n';li++;ci=0;setTimeout(type,500)}else setTimeout(type,38);
+}
+type();
+
+/* ticker */
+const logos=['Acme Corp','Initech','A guy named Dave','Stealth Startup','Your Previous Employer','3 VCs in a trench coat','Globex (allegedly)','Some Bank','A Fortune 500 intern','Everyone you know','The Board'];
+$('#track').innerHTML=[...logos,...logos].map(l=>`<span>${l}</span>`).join('');
+
+/* kpis */
+const kpis=[
+ [10,'×','faster than doing it yourself','+∞%'],
+ [99.97,'%','uptime (of this landing page)','+0.01%'],
+ [4.2,'','em-dashes per paragraph, on average','+38%'],
+ [0,'','lines of the README you will read','—'],
+ [147,'','rounded corners on this page','+12'],
+ [31,'','tiny uppercase labels','▲ always']
+];
+$('#kpis').innerHTML=kpis.map(([n,u,t,d],i)=>`<div class="kpi"><span class="up">${d}</span><div class="n"><span data-n="${n}" data-i="${i}">0</span><small>${u}</small></div><div class="t">${t}</div></div>`).join('');
+
+/* features */
+const feats=[
+ ['⚡','Blazingly fast','Written in Rust. Well, the README badge is. The rest is vibes.'],
+ ['🔒','Secure by default','We put a lock emoji on it. Security teams love the lock emoji.'],
+ ['🧠','AI-native','Every feature has "intelligent" in the name. It\'s in the spec.'],
+ ['🎯','Zero config','There are no settings, because we couldn\'t decide on any.'],
+ ['🌍','Scales infinitely','Load-tested on three users. One of them was a cat.'],
+ ['✨','Delightful','Hover over this card. See? It lifted 4px. That\'s delight.']
+];
+$('#feats').innerHTML=feats.map(([i,h,p])=>`<div class="card"><div class="ico">${i}</div><h3>${h}</h3><p>${p}</p></div>`).join('');
+
+const steps=[
+ ['01','Install','One command. It will install 412 other commands, but you only typed one.'],
+ ['02','Run','Paradigmly analyzes, synthesizes and delivers. Mostly delivers.'],
+ ['03','There is no step three','But we needed a third card for the grid to look balanced.']
+];
+$('#steps').innerHTML=steps.map(([n,h,p])=>`<div class="card step"><span class="num">${n} /</span><h3>${h}</h3><p>${p}</p></div>`).join('');
+
+/* bars */
+const bars=[['Confidence',100],['Enthusiasm',97],['Words per idea',88],['Accuracy',62],['Sources actually cited',4]];
+$('#bars').innerHTML=bars.map(([l,v])=>`<div class="row"><div class="top"><span>${l}</span><b>${v}%</b></div><div class="meter"><i data-w="${v}"></i></div></div>`).join('');
+
+/* pricing */
+const plans=[
+ ['Hobby','$0','/forever-ish',['1 paradigm','Community support (a Discord nobody checks)','Up to 3 green words per heading'],'Start free',0],
+ ['Pro','$29','/seat/month',['Unlimited paradigms','Gradient buttons','The glow effect','Priority "You\'re absolutely right"'],'Go Pro →',1],
+ ['Enterprise','Let\'s talk','',['Everything in Pro','SSO (Seamless Synergy Onboarding)','A dedicated eyebrow label','We will not, in fact, talk'],'Contact sales',0]
+];
+$('#plans').innerHTML=plans.map(([n,a,s,f,b,h])=>`<div class="card price${h?' hot':''}">${h?'<span class="badge">MOST POPULAR</span>':''}<span class="eyebrow" style="margin:0">${n}</span><div class="amt">${a}<small>${s}</small></div><ul>${f.map(x=>`<li>${x}</li>`).join('')}</ul><a class="btn${h?' p':''}" style="width:100%;justify-content:center" href="#top">${b}</a></div>`).join('');
+
+/* count up + bars on view */
+const count=el=>{const n=+el.dataset.n,dec=String(n).includes('.')?String(n).split('.')[1].length:0,t0=performance.now(),D=1600;
+  const f=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);el.textContent=(n*e).toFixed(dec);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;
+  if(el.dataset.n!==undefined)count(el);if(el.dataset.w!==undefined)el.style.width=el.dataset.w+'%';io.unobserve(el)}),{threshold:.4});
+document.querySelectorAll('[data-n],[data-w]').forEach(el=>io.observe(el));
+
+/* vibe dial */
+const msgs=['Claude-ness removed. This is just a website now.','A whisper of green.','Someone used Inter.','There is a glow. Barely.','Eyebrows detected.','Getting seamless.','Tasteful. Restrained. Slightly green.','The gradient is spreading.','Every word wants to be green.','Letter-spacing has left the building.','Delving. Actively delving.','You\'re absolutely right!'];
+const toast=$('#toast');let tt;
+const show=t=>{toast.textContent=t;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2600)};
+$('#vibe').addEventListener('input',e=>{
+  const v=+e.target.value;document.documentElement.style.setProperty('--v',v);
+  $('#vv').textContent=v+'/10';$('#vmsg').textContent=msgs[v];
+  document.body.classList.toggle('extra',v>=8);
+  document.body.classList.toggle('plain',v===0);
+  if(v===11)show('Great question! Let\'s dive in. 🚀 Here\'s the thing: you\'re absolutely right.');
+});
+}
+</script>
+</body>
